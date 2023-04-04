@@ -1,0 +1,89 @@
+body {
+  background-color: #F5F5F5;
+}
+
+h1 {
+  color: #333333;
+}
+
+form {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #CCCCCC;
+}
+
+label {
+  color: #333333;
+  font-weight: bold;
+}
+
+input[type=file] {
+  border: 2px solid #CCCCCC;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+a {
+  color: #4CAF50;
+  font-size: 16px;
+}
+/* 对于两个模块的容器，设置居中和固定宽度 */
+.module-container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+/* 对于左侧模块，设置浮动和固定宽度 */
+.left-module {
+  float: left;
+  width: 45%;
+}
+
+/* 对于右侧模块，设置浮动和固定宽度 */
+.right-module {
+  float: right;
+  width: 45%;
+}
+
+/* 对于模块内的标题，设置居中和字体大小 */
+.module-title {
+  text-align: center;
+  font-size: 30px;
+}
+
+/* 对于模块内的文件拖拽区域，设置居中和边框样式 */
+.dropzone {
+  text-align: center;
+  border: 2px dashed #AAAAAA;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* 对于模块内的按钮，设置居中和边框样式 */
+.btn {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+label[for=file] {
+  color: #333333;
+  font-weight: bold;
+  font-size: 18px;
+  display: block;
+}

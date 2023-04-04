@@ -1,0 +1,98 @@
+/* 定义字体 */
+body, input {
+  font-family: "宋体";
+}
+
+/* 整体布局设置成暖色调 */
+body {
+  background-color: #f4f4f4;
+}
+
+/* 主色调以389fc3这个颜色为主 */
+h2 {
+  text-align: center;
+  font-size: 40px;
+  font-family: SimSun, '宋体', serif;
+}
+
+/* 界面宽度 */
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 调整表单外边距和内边距 */
+form {
+  margin: 20px;
+  padding: 10px;
+}
+
+/* 模块的背景和边框 */
+.test_content_operation, .test_content_nr_main {
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+/* 模块标题 */
+.test_content_title_operation {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 用于在模块之间添加空白 */
+.test_content_nr_main:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+/* 模块中每个操作的背景 */
+li.option {
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* 每个操作的编号 */
+li.option span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 操作的运算符和运算数 */
+li.option span.op {
+  font-size: 16px;
+}
+
+/* 表单提交按钮 */
+.op_submit {
+  /* 设置背景色和字体大小 */
+  background-color: #389fc3;
+  color: #fff;
+  font-size: 18px;
+
+  /* 设置 padding 和边框圆角 */
+  padding: 5px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* 设置边框圆角半径为 5px */
+}
+
+/* hover 时改变提交按钮的颜色 */
+.op_submit:hover {
+  background-color: #4b8c9d;
+}
+.test_content_nr_tt span {
+    font-size: 20px;
+}
+.test_content_nr_tt input[name="opration"] {
+    font-size: 20px;
+    width: 400px;
+    height: 30px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

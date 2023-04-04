@@ -1,0 +1,74 @@
+{% extends 'student_layout.html' %}
+{% block content %}
+    <div class="container clearfix">
+        <div class="main-wrap">
+
+            <div class="crumb-wrap">
+                <div class="crumb-list"><i class="icon-font"></i><a href="/manage_student/">学生管理</a></span><span class="crumb-step">&gt;</span><span>添加学生</span></div>
+            </div>
+            <div class="result-wrap">
+                <div class="result-content">
+                    <form method="post" id="myform" name="myform" enctype="multipart/form-data">
+                        <table class="insert-tab" width="100%">
+                            <tbody>
+                                <tr>
+                                    <th><i class="require-red">*</i>学号：</th>
+                                    <td><input class="common-text" name="student_ID" size="20"  type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th><i class="require-red">*</i>出身年份：</th>
+                                    <td><input class="common-text" name="birthday" size="8"  type="date"></td>
+                                </tr>
+                                <tr>
+                                    <th><i class="require-red">*</i>学生名：</th>
+                                    <td><input class="common-text" name="name" size="20"  type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th width="120"><i class="require-red">*</i>性别：</th>
+                                    <td>
+                                        <select name="gender">
+                                            <option id = 'gender' value="男">男生</option>
+                                            <option id = 'gender' value="女">女士</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="require-red">*</i>语文成绩：：</th>
+                                    <td>
+                                        <input class="common-text" name="chinese_score" size="20"  type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="require-red">*</i>数学成绩：：</th>
+                                    <td>
+                                        <input class="common-text" name="math_score" size="20"  type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><i class="require-red">*</i>英语成绩：：</th>
+                                    <td>
+                                        <input class="common-text" name="english_score" size="20"  type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                        <input class="btn btn6" onClick="history.go(-1)" value="返回" type="button">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <span style="color: red">{{ error }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

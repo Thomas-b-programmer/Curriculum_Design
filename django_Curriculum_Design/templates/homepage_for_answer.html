@@ -1,0 +1,238 @@
+﻿{% csrf_token %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>四则运算在线出题</title>
+<link href="{% static 'css/CD_main.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/CD_iconfont.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/CD_test.css' %}" rel="stylesheet" type="text/css" />
+
+<style>
+.hasBeenAnswer {
+	background: #5d9cec;
+	color:#fff;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+		<!--nr start-->
+		<div class="test_main">
+			<div class="nr_left">
+				<div class="test">
+					<form action="" method="post" >
+						<div class="test_title">
+                            <p class="test_time">
+                                <span class="wenzi">剩余时间：</span>
+                                <span id="timer">30</span>
+                            </p>
+                            <font><input  type="submit" name="test_jiaojuan" id = "test_jiaojuan" value="交卷"></font>
+                            {% csrf_token %}
+                            <input type="hidden" name="list_data_hidden" id="list_data_hidden" value="{{ list_data }}">
+                        </div>
+						
+							<div class="test_content">
+								<div class="test_content_title">
+									<h2>单选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">10</i><span>题，</span><span>合计</span><i class="content_fs">100</i><span>分</span>
+									</p>
+								</div>
+							</div>
+							<div class="test_content_nr">
+                            {% for obj in list_data %}
+								<ul>
+                                    <li id="qu_0_{{ forloop.counter0 }}">
+                                        <div class="test_content_nr_tt">
+                                            <i>{{ forloop.counter }}</i><span>(10分)</span><span class="question">{{ obj.question|safe }}</span>
+                                            <b class="icon iconfont">
+                                                &#xe881;
+                                            </b>
+                                        </div>
+                                        <div class="test_content_nr_main">
+                                            <ul>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value='A'
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_1">
+                                                        A.
+                                                        <p class="ue" style="display: inline;">{{ obj.A }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value='B'
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_2">
+                                                        B.
+                                                        <p class="ue" style="display: inline;">{{ obj.B }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value='C'
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_3">
+                                                        C.
+                                                        <p class="ue" style="display: inline;">{{ obj.C }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value="D"
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_4">
+                                                        D.
+                                                        <p class="ue" style="display: inline;">{{ obj.D }}</p>
+                                                    </label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+								</ul>
+                                <div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                </div>
+							</div>
+					</form>
+				</div>
+
+			</div>
+			<div class="nr_right">
+				<div class="nr_rt_main">
+					<div class="rt_nr1">
+						<div class="rt_nr1_title">
+							<h1>
+								<i class="icon iconfont">&#xe692;</i>答题卡
+							</h1>
+						</div>
+							<div class="rt_content">
+								<div class="rt_content_tt">
+									<h2>单选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">10</i><span>题</span>
+									</p>
+								</div>
+								<div class="rt_content_nr answerSheet">
+									<ul>
+											<li><a href="#qu_0_0">1</a></li>
+
+											<li><a href="#qu_0_1">2</a></li>
+
+											<li><a href="#qu_0_2">3</a></li>
+
+											<li><a href="#qu_0_3">4</a></li>
+
+											<li><a href="#qu_0_4">5</a></li>
+
+											<li><a href="#qu_0_5">6</a></li>
+
+											<li><a href="#qu_0_6">7</a></li>
+
+											<li><a href="#qu_0_7">8</a></li>
+
+											<li><a href="#qu_0_8">9</a></li>
+
+											<li><a href="#qu_0_9">10</a></li>
+									</ul>
+								</div>
+							</div>
+
+
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--nr end-->
+		<div class="foot"></div>
+	</div>
+
+
+	<script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easy-pie-chart.js' %}"></script>
+	<!--时间js-->
+	<script src="{% static 'js/jquery.countdown.js' %}"></script>
+    <script>
+                // 获取倒计时所需的DOM元素
+        const timerElement = document.getElementById('timer');
+        const submitButton = document.getElementById('test_jiaojuan');
+
+        // 倒计时时长，单位为秒
+        const countdownDuration = 30 * 60; // 将倒计时时长设为30分钟，需要将秒数乘以60
+
+        // 记录当前剩余时间
+        let remainingTime = countdownDuration;
+
+        // 更新剩余时间的显示
+        function updateTimer() {
+          const minutes = Math.floor(remainingTime / 60); // 计算分钟数
+          const seconds = remainingTime % 60; // 计算剩余的秒数
+          timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`; // 更新剩余时间的显示
+        }
+
+        // 自动点击交卷的input标签
+        function clickSubmit() {
+          submitButton.click();
+        }
+
+        // 开始倒计时
+        const countdown = setInterval(() => {
+          remainingTime--;
+
+          // 如果剩余时间为0，停止倒计时，自动点击交卷的input标签
+          if (remainingTime === 0) {
+            clearInterval(countdown);
+            clickSubmit();
+          }
+
+          // 更新剩余时间的显示
+          updateTimer();
+        }, 1000);
+
+    </script>
+	<script>
+        function setListDataHidden() {
+            var list_data = document.getElementById('list_data').value;
+            document.getElementById('list_data_hidden').value = list_data;
+        }
+			"use strict";
+			
+			$('time').countDown({
+				with_separators : false
+			});
+			$('.alt-1').countDown({
+				css_class : 'countdown-alt-1'
+			});
+			$('.alt-2').countDown({
+				css_class : 'countdown-alt-2'
+			});
+			
+		});
+		$(function() {
+			$('li.option label').click(function() {
+			debugger;
+				var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
+				var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
+				// 设置已答题
+				if(!cardLi.hasClass('hasBeenAnswer')){
+					cardLi.addClass('hasBeenAnswer');
+				}
+				
+			});
+		});
+    </script>
+</body>
+
+</html>

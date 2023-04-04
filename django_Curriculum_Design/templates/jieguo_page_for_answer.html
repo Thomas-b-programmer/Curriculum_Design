@@ -1,0 +1,214 @@
+{% csrf_token %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>四则运算在线出题</title>
+<link href="{% static 'css/CD_main.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/CD_iconfont.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/CD_test.css' %}" rel="stylesheet" type="text/css" />
+
+<style>
+.hasBeenAnswer {
+	background: #5d9cec;
+	color:#fff;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+		<!--nr start-->
+		<div class="test_main">
+			<div class="nr_left">
+				<div class="test">
+					<form action="" method="post" >
+						<div class="test_title">
+                            <p class="test_time">
+                                {% for obj in list_score %}
+                                    <span class="wenzi">你最终的成绩是：</span><span>{{ obj.score }}</span>
+                                {% endfor %}
+                            </p>
+                            <font><a class="do_again" href="{% url 'homepage_answer' %}?id={{ list_data }}">再做一套</a></font>
+                            {% csrf_token %}
+                            <input type="hidden" name="list_data_hidden" id="list_data_hidden" value="{{ list_data }}">
+                        </div>
+
+							<div class="test_content">
+								<div class="test_content_title">
+									<h2>单选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">10</i><span>题，</span><span>合计</span><i class="content_fs">100</i><span>分</span>
+									</p>
+								</div>
+							</div>
+							<div class="test_content_nr">
+                            {% for obj in list_data %}
+								<ul>
+                                    <li id="qu_0_{{ forloop.counter0 }}">
+                                        <div class="test_content_nr_tt">
+                                            <i>{{ forloop.counter }}</i><span>(10分)</span><span class="question">{{ obj.question|safe }}</span>
+                                            <b class="icon iconfont">
+                                            <form>
+                                                <ul>
+                                                {% if obj.judge == 1 %}
+                                                    <img class="teding-img" src="{% static 'images/对钩.png' %}">
+                                                {% endif %}
+                                                {% if obj.judge == 0 %}
+                                                    <img class="teding-img" src="{% static 'images/叉.png' %}">
+                                                {% endif %}
+                                                {% if obj.judge == 2 %}
+                                                    &#xe881;
+                                                {% endif %}
+                                                </ul>
+                                           </form>
+                                            </b>
+                                        </div>
+                                        <div class="test_content_nr_main">
+                                            <ul>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value='A'
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_1">
+                                                        A.
+                                                        <p class="ue" style="display: inline;">{{ obj.A }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value='B'
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_2">
+                                                        B.
+                                                        <p class="ue" style="display: inline;">{{ obj.B }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value='C'
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_3">
+                                                        C.
+                                                        <p class="ue" style="display: inline;">{{ obj.C }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    <input type="radio" class="radioOrCheck" name="answer{{ forloop.parentloop.counter }}_{{ forloop.counter }}"
+                                                        id="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option" value="D"
+                                                    />
+                                                    <label for="{{ forloop.parentloop.counter }}_{{ forloop.counter }}_answer_1_option_4">
+                                                        D.
+                                                        <p class="ue" style="display: inline;">{{ obj.D }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class="option">
+                                                    {% if obj.judge == 0 %}
+                                                        <p class="cuowudaan">正确的答案是：{{ obj.answer }}</p>
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+								</ul>
+							</div>
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+					</form>
+				</div>
+
+			</div>
+			<div class="nr_right">
+				<div class="nr_rt_main">
+					<div class="rt_nr1">
+						<div class="rt_nr1_title">
+							<h1>
+								<i class="icon iconfont">&#xe692;</i>答题卡
+							</h1>
+						</div>
+							<div class="rt_content">
+								<div class="rt_content_tt">
+									<h2>单选题</h2>
+									<p>
+										<span>共</span><i class="content_lit">10</i><span>题</span>
+									</p>
+								</div>
+								<div class="rt_content_nr answerSheet">
+									<ul>
+                                        {% for obj in list_data %}
+                                            {% if obj.judge == 0 or obj.judge == 2 %}
+											<li><a href="#qu_0_{{ forloop.counter0 }}" class="cuo">{{ forloop.counter }}</a></li>
+                                            {% endif %}
+											{% if obj.judge == 1 %}
+											<li><a href="#qu_0_{{ forloop.counter0 }}" class="dui">{{ forloop.counter }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+                        <div class="rt_nr1_title">
+							<h1 >
+                                显示栈值的变化
+							</h1>
+						</div>
+							<div class="rt_content">
+								<div class="rt_content_tt">
+									<a href="#" onclick="window.open('{% url 'show_operation' %}', '_blank'); return false;" class="teding_a">点击跳转</a>
+								</div>
+							</div>
+
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--nr end-->
+		<div class="foot"></div>
+	</div>
+
+	<script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easy-pie-chart.js' %}"></script>
+	<!--时间js-->
+	<script src="{% static 'js/jquery.countdown.js' %}"></script>
+	<script>
+        function setListDataHidden() {
+            var list_data = document.getElementById('list_data').value;
+            document.getElementById('list_data_hidden').value = list_data;
+        }
+			"use strict";
+
+			$('time').countDown({
+				with_separators : false
+			});
+			$('.alt-1').countDown({
+				css_class : 'countdown-alt-1'
+			});
+			$('.alt-2').countDown({
+				css_class : 'countdown-alt-2'
+			});
+
+		});
+		$(function() {
+			$('li.option label').click(function() {
+			debugger;
+				var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
+				var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
+				// 设置已答题
+				if(!cardLi.hasClass('hasBeenAnswer')){
+					cardLi.addClass('hasBeenAnswer');
+				}
+
+			});
+		});
+	</script>
+</body>
+
+</html>

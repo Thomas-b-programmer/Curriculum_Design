@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>编码压缩和译码压缩文件工具</title>
+    <link href="{% static 'css/CO_main.css' %}" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="module-container">
+    <div class="module" id="encode-module">
+        <h1 class="module-title">编码压缩</h1>
+        <form method="post" enctype="multipart/form-data" id="encode-form" action="{% url 'encode_file' %}">
+            {% csrf_token %}
+            <label for="encode-file">选择需要编码的文件：</label><br>
+            <input type="file" name="encode-file"><br><br>
+            <input class="btn" type="submit" id="encode-btn" value="Encode">
+        </form>
+        <div class="module-result" id="encode-result"></div>
+    </div>
+    <div class="module" id="decode-module">
+        <h1 class="module-title">译码压缩</h1>
+        <form method="post" enctype="multipart/form-data" id="decode-form" action="{% url 'decode_file' %}">
+            {% csrf_token %}
+            <label for="decode-file">选择需要译码的文件：</label><br>
+            <input type="file" name="decode-file"><br><br>
+            <input class="btn" type="submit" value="Decode">
+        </form>
+        <div class="module-result" id="decode-result"></div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+    $('#encode-form').submit(function(event) {
+        event.preventDefault();
+        var form_data = new FormData($('#encode-form')[0]);
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'encode_file' %}",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                $('#encode-result').html('<a href="' + data + '" download>下载编码后的文件</a>');
+            }
+        });
+    });
+
+    $('#decode-form').submit(function(event) {
+        event.preventDefault();
+        var form_data = new FormData($('#decode-form')[0]);
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'decode_file' %}",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                $('#decode-result').html('<a href="' + data + '" download>下载译码后的文件</a>');
+            }
+        });
+    });
+
+    $('#encode-btn').click(function() {
+        $('#encode-module').empty();
+        $('#decode-module').empty();
+        $('#encode-result').empty();
+        $('#decode-result').empty();
+        $('body').append('\
+            <div class="module-container">\
+                <div class="left-module">\
+                    <h1 class="module-title">编码压缩</h1>\
+                    <form method="post" enctype="multipart/form-data" id="encode-form" action="{% url 'encode_file' %}">\
+                        {% csrf_token %}\
+                        <label for="file">选择需要编码的文件：</label><br>\
+                        <input type="file" name="encode-file"><br><br>\
+                        <input class="btn" type="submit" value="Encode">\
+                    </form>\
+                    <div id="encoded-file-link"></div>\
+                </div>\
+                <div class="right-module">\
+                    <h1 class="module-title">译码压缩</h1>\
+                    <form method="post" enctype="multipart/form-data">\
+                        {% csrf_token %}\
+                        <label for="file">选择需要译码的文件：</label><br>\
+                        <input type="file" name="decode-file"><br><br>\
+                        <input class="btn" type="submit" value="Decode">\
+                    </form>\
+                    <div id="decoded-file-link"></div>\
+                </div>\
+            </div>\
+        ');
+    });
+});
+</script>
+</body>
+</html>

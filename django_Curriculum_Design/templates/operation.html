@@ -1,0 +1,77 @@
+{% csrf_token %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>四则运算在线出题</title>
+<link href="{% static 'css/CD_op_style.css' %}" rel="stylesheet" type="text/css" />
+<style>
+.hasBeenAnswer {
+	background: #5d9cec;
+	color:#fff;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+		<!--nr start-->
+		<div class="test_main">
+			<div class="nr_left">
+				<div class="test">
+                {% csrf_token %}
+					<form action="" method="post" >
+							<div class="test_content_operation" >
+								<div class="test_content_title_operation">
+									<h2>栈的展示效果</h2>
+								</div>
+							</div>
+							<div class="test_content_nr">
+								<ul>
+                                    <li id="qu_0_0">
+                                        <div class="test_content_nr_tt">
+                                            <span>请输入运算表达式：</span>
+                                            <input name="opration" size="40" value='{{ operation }}'>
+                                            <input type="submit" name="submit_operation" class="op_submit" value="提交">
+                                            <b class="icon iconfont">
+                                            </b>
+                                        </div>
+                                        <div class="test_content_nr_main">
+                                            <ul>
+                                                {% for obj in list_operation %}
+                                                    <li class="option">
+                                                    <span>第{{ forloop.counter }}步:</span><br>
+                                                    </li>
+                                                <li class="option">
+                                                    <span class="op">运算符栈：{{ obj.operator }}</span>
+                                                </li>
+                                                <li class="option">
+                                                    <span class="op">运算数栈: {{ obj.operand }}</span>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </li>
+
+								</ul>
+							</div>
+                            <div>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+					</form>
+				</div>
+			</div>
+			</div>
+    </div>
+		<!--nr end-->
+		<div class="foot"></div>
+	</div>
+	<script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+	<script src="{% static 'js/jquery.easy-pie-chart.js' %}"></script>
+</body>
+
+</html>

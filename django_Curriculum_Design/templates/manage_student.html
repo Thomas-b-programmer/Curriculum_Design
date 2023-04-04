@@ -1,0 +1,70 @@
+{% extends 'student_layout.html' %}
+{% block content %}
+<div class="container">
+<form method="post">
+    <div class="crumb-wrap">
+                <div class="crumb-list"><i class="icon-font"></i><a href="/manage_student/">学生管理</a></div>
+    </div>
+    {% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <input type="button" value="添加学生" onclick="window.open('/insert_student/')" class="btn btn-success" style="width: 100px; height: 35px;margin-bottom: 5px;margin-top: 5px">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入关键词查找" style="max-width: 200px;" name="keyword">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit" style="width: 60px; height: 33px;">搜索</button>
+                </span>
+            </div>
+        </div>
+    </form>
+    <!-- 学生列表 -->
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true">学子列表</span>
+
+        </div>
+
+        <!-- Table -->
+        <table class="table table-bordered">
+            <thead>
+                    <tr>
+                        <th>学号<a class="paixu" href="/manage_student/?uid=1"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=2"><span>↓</span></a></th>
+                        <th>姓名<a class="paixu" href="/manage_student/?uid=3"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=4"><span>↓</span></a></th>
+                        <th>性别<a class="paixu" href="/manage_student/?uid=5"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=6"><span>↓</span></a></th>
+                        <th>出生年份<a class="paixu" href="/manage_student/?uid=7"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=8"><span>↓</span></a></th>
+                        <th>数学成绩<a class="paixu" href="/manage_student/?uid=9"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=10"><span>↓</span></a></th>
+                        <th>语文成绩<a class="paixu" href="/manage_student/?uid=11"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=12"><span>↓</span></a></th>
+                        <th>英语成绩<a class="paixu" href="/manage_student/?uid=13"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=14"><span>↓</span></a></th>
+                        <th>总分<a class="paixu" href="/manage_student/?uid=15"><span>↑</span></a><a class="paixu" href="/manage_student/?uid=16"><span>↓</span></a></th>
+                        <th></th>
+                    </tr>
+            </thead>
+            <tbody>
+            {% for obj in students %}
+                <tr>
+                    <th>{{ obj.student_id }}</th>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.gender }}</td>
+                    <td>{{ obj.birthday }}</td>
+                    <th>{{ obj.math_score }}</th>
+                    <th>{{ obj.chinese_score }}</th>
+                    <th>{{ obj.english_score }}</th>
+                    <th>{{ obj.total_score }}</th>
+                    <td style="display: inline-flex;">
+                        <input uid="{{ obj.id }}" onclick="window.open('/edit_student/?uid={{ obj.id }}')" class="btn btn-primary btn3 mr10" value="编辑" type="button">
+                        <form method="post" action="/delete_student/">
+                            {% csrf_token %}
+                            <input class="btn btn-danger btn-xs btn-delete" type="submit" value="删除" >
+                            <input type="hidden" name="s_id" value={{ obj.student_id }}>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</form>
+</div>
+{% endblock %}
